@@ -28,13 +28,16 @@ class TiketVelvet extends Tiket
         $this->layananButler = $layananButler;
     }
 
+    // Override method abstract dari class Tiket
     public function hitungTotalHarga()
     {
-        return $this->hargaDasarTiket + 50000;
+        return ($this->jumlah_kursi * $this->hargaDasarTiket) + 50000;
     }
 
+    // Override method abstract dari class Tiket
     public function tampilkanInfoFasilitas()
     {
-        return "Bantal & Selimut: $this->bantalSelimutPack, Butler: $this->layananButler";
+        return "Bantal & Selimut: " . $this->bantalSelimutPack .
+               ", Butler: " . $this->layananButler;
     }
 }
