@@ -15,6 +15,7 @@ $koneksi = $db->getKoneksi();
 // 4. Jalankan query
 $query = mysqli_query($koneksi, "SELECT * FROM tabel_tiket");
 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,9 +54,13 @@ $query = mysqli_query($koneksi, "SELECT * FROM tabel_tiket");
 
 while($row = mysqli_fetch_assoc($query))
 {
+    // Default inisialisasi agar tidak terjadi error undefined variable
+    $tiket = null; 
+
+    // Menggunakan nilai huruf kecil sesuai data di dump SQL
     switch($row['jenis_studio'])
     {
-        case 'Regular':
+        case 'regular':
 
             $tiket = new TiketRegular(
                 $row['id_tiket'],
@@ -63,13 +68,13 @@ while($row = mysqli_fetch_assoc($query))
                 $row['jadwal_tayang'],
                 $row['jumlah_kursi'],
                 $row['harga_dasar_tiket'],
-                $row['tipe_audio'],
+                $row['tipe_studio'], // SQL menggunakan tipe_studio, bukan tipe_audio
                 $row['lokasi_baris']
             );
 
             break;
 
-        case 'IMAX':
+        case 'max':
 
             $tiket = new TiketIMAX(
                 $row['id_tiket'],
@@ -83,7 +88,7 @@ while($row = mysqli_fetch_assoc($query))
 
             break;
 
-        case 'Velvet':
+        case 'velvet':
 
             $tiket = new TiketVelvet(
                 $row['id_tiket'],
@@ -98,15 +103,18 @@ while($row = mysqli_fetch_assoc($query))
             break;
     }
 
-    echo "
-    <tr>
-        <td>{$row['id_tiket']}</td>
-        <td>{$row['nama_film']}</td>
-        <td>{$row['jenis_studio']}</td>
-        <td>{$row['jumlah_kursi']}</td>
-        <td>".$tiket->tampilkanInfoFasilitas()."</td>
-        <td>Rp ".number_format($tiket->hitungTotalHarga(),0,',','.')."</td>
-    </tr>";
+    // Pastikan objek tiket berhasil dibuat sebelum menampilkan datanya
+    if ($tiket !== null) {
+        echo "
+        <tr>
+            <td>{$row['id_tiket']}</td>
+            <td>{$row['nama_film']}</td>
+            <td>{$row['jenis_studio']}</td>
+            <td>{$row['jumlah_kursi']}</td>
+            <td>".$tiket->tampilkanInfoFasilitas()."</td>
+            <td>Rp ".number_format($tiket->hitungTotalHarga(),0,',','.')."</td>
+        </tr>";
+    }
 }
 ?>
 
