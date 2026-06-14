@@ -1,13 +1,19 @@
 <?php
 
-require_once "koneksi/database.php";
-require_once "models/TiketRegular.php";
-require_once "models/TiketIMAX.php";
-require_once "models/TiketVelvet.php";
+// 1. Panggil file koneksi yang benar (tanpa folder koneksi/)
+require_once "koneksi.php";
 
+// 2. Panggil file model sesuai nama file asli (perhatikan huruf besar/kecilnya)
+require_once "TiketReguler.php";
+require_once "tiketimax.php";
+require_once "TiketVelvet.php";
+
+// 3. Buat objek dari class Database dan ambil koneksinya
+$db = new Database();
+$koneksi = $db->getKoneksi();
+
+// 4. Jalankan query
 $query = mysqli_query($koneksi, "SELECT * FROM tabel_tiket");
-
-?>
 
 <!DOCTYPE html>
 <html>
