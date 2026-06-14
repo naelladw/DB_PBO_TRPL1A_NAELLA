@@ -28,13 +28,16 @@ class TiketIMAX extends Tiket
         $this->efekGerakFitur = $efekGerakFitur;
     }
 
+    // Override method abstract dari class Tiket
     public function hitungTotalHarga()
     {
-        return $this->hargaDasarTiket + 30000;
+        return ($this->jumlah_kursi * $this->hargaDasarTiket) + 30000;
     }
 
+    // Override method abstract dari class Tiket
     public function tampilkanInfoFasilitas()
     {
-        return "Kacamata 3D: $this->kacamata3dId, Efek Gerak: $this->efekGerakFitur";
+        return "Kacamata 3D: " . $this->kacamata3dId .
+               ", Efek Gerak: " . $this->efekGerakFitur;
     }
 }
