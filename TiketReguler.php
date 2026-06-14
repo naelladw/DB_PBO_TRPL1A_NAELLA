@@ -28,13 +28,16 @@ class TiketRegular extends Tiket
         $this->lokasiBaris = $lokasiBaris;
     }
 
+    // Override method abstract dari class Tiket
     public function hitungTotalHarga()
     {
-        return $this->hargaDasarTiket;
+        return $this->jumlah_kursi * $this->hargaDasarTiket;
     }
 
+    // Override method abstract dari class Tiket
     public function tampilkanInfoFasilitas()
     {
-        return "Audio: $this->tipeAudio, Baris: $this->lokasiBaris";
+        return "Audio: " . $this->tipeAudio .
+               ", Baris: " . $this->lokasiBaris;
     }
 }
