@@ -5,7 +5,7 @@ class Database
     private $host = "localhost";
     private $username = "root";
     private $password = "";
-    private $database = "db_pbo_trpl1a_naella";
+    private $database = "DB_PBO_TRPL1A_NAELLA";
 
     protected $koneksi;
 
