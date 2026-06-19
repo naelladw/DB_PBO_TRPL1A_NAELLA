@@ -5,7 +5,7 @@ require_once "koneksi.php";
 
 // 2. Panggil file model sesuai nama file asli (perhatikan huruf besar/kecilnya)
 require_once "TiketReguler.php";
-require_once "tiketimax.php";
+require_once "Tiketimax.php";
 require_once "TiketVelvet.php";
 
 // 3. Buat objek dari class Database dan ambil koneksinya
